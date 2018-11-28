@@ -12,11 +12,25 @@ BLog::BLog()
 {
 }
 
+void BLog::addChannelMap(LogChannelType type, BLogChannel* channel)
+{
+	channelMap.insert(std::pair<LogChannelType, BLogChannel*>(type, channel));
+}
+
+BLogChannel* BLog::getChannelMapping(LogChannelType type)
+{
+	return channelMap.at(type);
+}
+
 bool BLog::init()
 {
 	infoChannel = new BLogChannel("info.log", CHANNEL_STD_OUT);
+	addChannelMap(LOG_INFO, infoChannel);
 	animChannel = new BLogChannel("anim.log", CHANNEL_STD_OUT);
+	addChannelMap(LOG_ANIM, animChannel);
 	errorChannel = new BLogChannel("error.log", CHANNEL_STD_ERR);
+	addChannelMap(LOG_ERROR, errorChannel);
+
 
 	return true;
 }
@@ -30,44 +44,21 @@ void BLog::write(int target, const char* msg, ...)
 
 	bool streamsWritten[CHANNEL_TYPE_MAX] = { false };
 
-	// FIXME: change to loop ... for (int i == 1; i < LOG_MAX; i << 1)
-
-	if (target & LOG_INFO)
+	for (int i = 1; i < LOG_MAX; i = i << 1)
 	{
-		if (!streamsWritten[infoChannel->getOutputType()])
+		LogChannelType curType = (LogChannelType)i;
+		BLogChannel* curChannel = getChannelMapping(curType);
+		if (target & curType)
 		{
-			streamsWritten[infoChannel->getOutputType()] = true;
-			infoChannel->write(szBuf);
-		}
-		else
-		{
-			infoChannel->writeFile(szBuf);
-		}
-	}
-
-	if (target & LOG_ANIM)
-	{
-		if (!streamsWritten[animChannel->getOutputType()])
-		{
-			streamsWritten[animChannel->getOutputType()] = true;
-			animChannel->write(szBuf);
-		}
-		else
-		{
-			animChannel->writeFile(szBuf);
-		}
-	}
-
-	if (target & LOG_ERROR)
-	{
-		if (!streamsWritten[errorChannel->getOutputType()])
-		{
-			streamsWritten[errorChannel->getOutputType()] = true;
-			errorChannel->write(szBuf);
-		}
-		else
-		{
-			errorChannel->writeFile(szBuf);
+			if (!streamsWritten[curChannel->getOutputType()])
+			{
+				streamsWritten[curChannel->getOutputType()] = true;
+				curChannel->write(szBuf);
+			}
+			else
+			{
+				curChannel->writeFile(szBuf);
+			}
 		}
 	}
 }

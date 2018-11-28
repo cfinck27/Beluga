@@ -3,6 +3,8 @@
 
 #include "BLogChannel.h"
 
+#include <map>
+
 enum LogChannelType
 {
 	LOG_INFO = 1 << 0,
@@ -11,10 +13,19 @@ enum LogChannelType
 	LOG_MAX = 1 << 3 // highest max: 33
 };
 
+// TODO: add a spam filter using a ring buffer that stores
+//			history of outputs for a certain length of time
+//			and then prevents same messages.
+
 class BLog
 {
 
 protected:
+
+	std::map<LogChannelType, BLogChannel*> channelMap;
+
+	void addChannelMap(LogChannelType type, BLogChannel* channel);
+	BLogChannel* getChannelMapping(LogChannelType type);
 
 	BLogChannel* infoChannel;
 	BLogChannel* animChannel;
@@ -27,7 +38,6 @@ public:
 	bool init();
 	void write(int target, const char* msg, ...);
 	
-
 };
 
 #endif
