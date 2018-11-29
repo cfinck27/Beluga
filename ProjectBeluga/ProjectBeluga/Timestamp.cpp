@@ -1,6 +1,12 @@
 #include "Timestamp.h"
 
 
+Timestamp& Timestamp::getCurrentTimestamp()
+{
+	time_t rawtime;
+	time(&rawtime);
+	return *(new Timestamp(rawtime));
+}
 
 Timestamp::Timestamp(epoch_t s)
 {

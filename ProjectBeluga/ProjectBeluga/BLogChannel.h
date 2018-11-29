@@ -23,6 +23,7 @@ class BLogChannel
 
 protected:
 
+	char* m_channelName;
 	ChannelOutType outType;
 
 	std::ofstream* file;
@@ -30,14 +31,17 @@ protected:
 
 public:
 
-	BLogChannel(char* filename, ChannelOutType outType = CHANNEL_NONE);
+	BLogChannel(char* channelName, char* filename, ChannelOutType outType = CHANNEL_NONE);
 
 	void setOutput(ChannelOutType outType);
 	ChannelOutType getOutputType();
 	
-	void write(const char* msg, ...);
-	void writeFile(const char* msg, ...);
-	void writeOutput(const char* msg, ...);
+	void write(const char* msg);
+	void writeFile(const char* msg);
+	void writeOutput(const char* msg);
+	void fwrite(const char* msg, ...);
+	void fwriteFile(const char* msg, ...);
+	void fwriteOutput(const char* msg, ...);
 
 };
 

@@ -13,6 +13,23 @@ enum LogChannelType
 	LOG_MAX = 1 << 3 // highest max: 33
 };
 
+/*
+char* getLogChannelName(LogChannelType type)
+{
+	switch (type)
+	{
+		case LOG_INFO:
+			return "INFO";
+		case LOG_ERROR:
+			return "ERROR";
+		case LOG_ANIM:
+			return "ANIM";
+		default:
+			return "UNKNOWN";
+	}
+}
+*/
+
 // TODO: add a spam filter using a ring buffer that stores
 //			history of outputs for a certain length of time
 //			and then prevents same messages.

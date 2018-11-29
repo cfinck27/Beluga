@@ -24,13 +24,12 @@ BLogChannel* BLog::getChannelMapping(LogChannelType type)
 
 bool BLog::init()
 {
-	infoChannel = new BLogChannel("info.log", CHANNEL_STD_OUT);
+	infoChannel = new BLogChannel("INFO", "info.log", CHANNEL_STD_OUT);
 	addChannelMap(LOG_INFO, infoChannel);
-	animChannel = new BLogChannel("anim.log", CHANNEL_STD_OUT);
+	animChannel = new BLogChannel("ANIM", "anim.log", CHANNEL_STD_OUT);
 	addChannelMap(LOG_ANIM, animChannel);
-	errorChannel = new BLogChannel("error.log", CHANNEL_STD_ERR);
+	errorChannel = new BLogChannel("ERROR", "error.log", CHANNEL_STD_ERR);
 	addChannelMap(LOG_ERROR, errorChannel);
-
 
 	return true;
 }

@@ -2,8 +2,11 @@
 
 #include <cstdarg>
 
-BLogChannel::BLogChannel(char* filename, ChannelOutType outType)
+#include "Timestamp.h"
+
+BLogChannel::BLogChannel(char* channelName, char* filename, ChannelOutType outType)
 {
+	m_channelName = channelName;
 	file = new std::ofstream(filename);
 
 	setOutput(outType);
@@ -36,7 +39,39 @@ ChannelOutType BLogChannel::getOutputType()
 	return outType;
 }
 
-void BLogChannel::write(const char* msg, ...)
+void BLogChannel::write(const char* msg)
+{
+	writeFile(msg);
+	writeOutput(msg);
+}
+
+void BLogChannel::writeFile(const char* msg)
+{
+	*file << '[' << Timestamp::getCurrentTimestamp().asHourString() << "] " << msg << std::endl;
+	file->flush();
+}
+
+void BLogChannel::writeOutput(const char* msg)
+{
+	if (out)
+	{
+		*out << '[' << Timestamp::getCurrentTimestamp().asHourString() << "] " <<
+					'(' << m_channelName << ") " << msg << std::endl;
+		out->flush();
+	}
+}
+
+void BLogChannel::fwrite(const char* msg, ...)
+{
+	va_list args;
+	va_start(args, msg);
+	char szBuf[MAX_CHANNEL_BUFFER];
+	vsprintf_s(szBuf, msg, args);
+
+	write(szBuf);
+}
+
+void BLogChannel::fwriteFile(const char* msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
@@ -44,30 +79,14 @@ void BLogChannel::write(const char* msg, ...)
 	vsprintf_s(szBuf, msg, args);
 
 	writeFile(szBuf);
-	writeOutput(szBuf);
 }
 
-void BLogChannel::writeFile(const char* msg, ...)
+void BLogChannel::fwriteOutput(const char* msg, ...)
 {
 	va_list args;
 	va_start(args, msg);
 	char szBuf[MAX_CHANNEL_BUFFER];
 	vsprintf_s(szBuf, msg, args);
 
-	*file << szBuf << std::endl;
-	file->flush();
-}
-
-void BLogChannel::writeOutput(const char* msg, ...)
-{
-	va_list args;
-	va_start(args, msg);
-	char szBuf[MAX_CHANNEL_BUFFER];
-	vsprintf_s(szBuf, msg, args);
-
-	if (out)
-	{
-		*out << szBuf << std::endl;
-		out->flush();
-	}
+	writeOutput(msg);
 }
