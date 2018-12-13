@@ -1,5 +1,5 @@
-#ifndef RING_BUFFER_H
-#define RING_BUFFER_H
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
 #include "Node.h"
 

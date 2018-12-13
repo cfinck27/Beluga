@@ -7,9 +7,25 @@
 
 // FIXME: do something with this..
 const std::string LOG_PATH = "logs/";
+BLog* BLog::sLog = 0;
 
 BLog::BLog()
 {
+	bInitialized = false;
+	init();
+}
+
+BLog::~BLog()
+{
+}
+
+BLog& BLog::get()
+{
+	if (sLog == 0)
+	{
+		sLog = new BLog();
+	}
+	return *sLog;
 }
 
 void BLog::addChannelMap(LogChannelType type, BLogChannel* channel)
@@ -24,6 +40,8 @@ BLogChannel* BLog::getChannelMapping(LogChannelType type)
 
 bool BLog::init()
 {
+	bInitialized = true;
+
 	infoChannel = new BLogChannel("INFO", "info.log", CHANNEL_STD_OUT);
 	addChannelMap(LOG_INFO, infoChannel);
 	animChannel = new BLogChannel("ANIM", "anim.log", CHANNEL_STD_OUT);

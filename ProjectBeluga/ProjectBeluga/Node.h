@@ -12,7 +12,7 @@ protected:
 
 public:
 
-	Node(T* data, Node<T>* next = NULL)
+	Node(T* data, Node<T>* next = 0)
 	{
 		m_data = data;
 		m_next = next;

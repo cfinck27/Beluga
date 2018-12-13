@@ -112,15 +112,21 @@
   <ItemGroup>
     <ClCompile Include="BLog.cpp" />
     <ClCompile Include="BLogChannel.cpp" />
+    <ClCompile Include="IMMObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Timestamp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BLog.h" />
     <ClInclude Include="BLogChannel.h" />
+    <ClInclude Include="BTypes.h" />
+    <ClInclude Include="CMMPointer.h" />
+    <ClInclude Include="IMMObject.h" />
     <ClInclude Include="KVPair.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="Timestamp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

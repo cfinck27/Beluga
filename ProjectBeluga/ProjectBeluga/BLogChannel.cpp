@@ -39,6 +39,21 @@ ChannelOutType BLogChannel::getOutputType()
 	return outType;
 }
 
+void BLogChannel::writeRaw(const char* msg)
+{
+	*file << msg;
+}
+
+void BLogChannel::fwriteRaw(const char* msg, ...)
+{
+	va_list args;
+	va_start(args, msg);
+	char szBuf[MAX_CHANNEL_BUFFER];
+	vsprintf_s(szBuf, msg, args);
+
+	writeRaw(szBuf);
+}
+
 void BLogChannel::write(const char* msg)
 {
 	writeFile(msg);

@@ -1,7 +1,11 @@
 #ifndef TIMESTAMP_H
 #define TIMESTAMP_H
 
-#include <ctime>
+#include "IMMObject.h"
+#include "CMMPointer.h"
+
+//#include <ctime>
+struct tm;
 
 // Time since Jan 1, 1970 in seconds
 typedef unsigned long long epoch_t;
@@ -11,11 +15,11 @@ class Timestamp
 
 public:
 
-	static Timestamp& getCurrentTimestamp();
+	static Timestamp getCurrentTimestamp();
 
 private:
-
-	tm* stamp = new tm();
+	
+	tm* stamp;
 
 protected:
 

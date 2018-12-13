@@ -19,6 +19,15 @@
     <Filter Include="Source Files\Util">
       <UniqueIdentifier>{b4194f9f-e926-4c2d-9811-15abe0831174}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Memory">
+      <UniqueIdentifier>{f3061411-c98c-427e-bdca-be58a70093cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Data Structures">
+      <UniqueIdentifier>{98daf15d-2db0-470b-83e4-36f988584fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{d2873950-a2cf-4b04-a00b-8035e1b5cf5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,6 +42,12 @@
     <ClCompile Include="Timestamp.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="IMMObject.cpp">
+      <Filter>Source Files\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>Source Files\Data Structures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BLog.h">
@@ -41,17 +56,29 @@
     <ClInclude Include="BLogChannel.h">
       <Filter>Source Files\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>Source Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="KVPair.h">
-      <Filter>Source Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Timestamp.h">
       <Filter>Source Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="IMMObject.h">
+      <Filter>Source Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="CMMPointer.h">
+      <Filter>Source Files\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="KVPair.h">
+      <Filter>Source Files\Data Structures</Filter>
+    </ClInclude>
     <ClInclude Include="LinkedList.h">
-      <Filter>Source Files\Util</Filter>
+      <Filter>Source Files\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Source Files\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Source Files\Data Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="BTypes.h">
+      <Filter>Source Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,15 +1,20 @@
 #include "Timestamp.h"
 
 
-Timestamp& Timestamp::getCurrentTimestamp()
+#include <ctime>
+
+static_assert(sizeof(epoch_t) == sizeof(time_t), "epoch_t is not compatible with time_t");
+
+Timestamp Timestamp::getCurrentTimestamp()
 {
 	time_t rawtime;
 	time(&rawtime);
-	return *(new Timestamp(rawtime));
+	return Timestamp(rawtime);
 }
 
 Timestamp::Timestamp(epoch_t s)
 {
+	stamp = new tm();
 	m_seconds = s;
 	updateStamp();
 }

@@ -36,6 +36,10 @@ public:
 	void setOutput(ChannelOutType outType);
 	ChannelOutType getOutputType();
 	
+	// write with no timestamp, channel name, or endl
+	void writeRaw(const char* msg);
+	void fwriteRaw(const char* msg, ...);
+
 	void write(const char* msg);
 	void writeFile(const char* msg);
 	void writeOutput(const char* msg);
